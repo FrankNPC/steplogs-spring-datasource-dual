@@ -1,0 +1,33 @@
+
+spring:
+  datasource:
+    writer:
+      username: username
+      password: password
+      jdbcUrl: jdbc:mariadb://localho11st:3306/db?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8
+      leakDetectionThreshold: 1200000
+      maxLifetime: 36000000
+      keepaliveTime: 600000
+      maximumPoolSize: 1024
+      minimumIdle: 4
+      transactionIsolation: 4
+      connectionTestQuery: SELECT 1
+      driverClassName: org.mariadb.jdbc.Driver
+      autoCommit: false
+      readOnly: false
+      instanceCount: 1
+    reader:
+      username: username
+      password: password
+      jdbcUrl: jdbc:mariadb://localh11ost:3306/db?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8
+      leakDetectionThreshold: 60000
+      maxLifetime: 18000000
+      keepaliveTime: 300000
+      maximumPoolSize: 512
+      minimumIdle: 2
+      transactionIsolation: 2
+      connectionTestQuery: SELECT 1
+      driverClassName: org.mariadb.jdbc.Driver
+      autoCommit: false
+      readOnly: true
+      instanceCount: 5
