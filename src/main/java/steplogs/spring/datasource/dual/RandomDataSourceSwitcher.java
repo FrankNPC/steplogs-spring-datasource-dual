@@ -39,13 +39,13 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 
 	@Override
 	public String toWriterDataSource() {
-		if (writerSourceKeyList==null) {
-			return null;
+		String key = DataSourceKeyContainer.get();
+		if (key!=null && key.charAt(0)==DATA_SOURCE_KEY_WRITER.charAt(0)) {
+			return key;
 		}
 
-		String key = DataSourceKeyContainer.get();
-		if (key!=null && key.startsWith(DATA_SOURCE_KEY_WRITER)) {
-			return key;
+		if (writerSourceKeyList==null) {
+			return null;
 		}
 
 		Random random = RandomContainer.get();
@@ -60,6 +60,11 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 
 	@Override
 	public String toReaderDataSource() {
+		String key = DataSourceKeyContainer.get();
+		if (key!=null && key.charAt(0)==DATA_SOURCE_KEY_READER.charAt(0)) {
+			return key;
+		}
+		
 		if (readerSourceKeyList==null) {
 			return null;
 		}
@@ -69,7 +74,7 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 			RandomContainer.set(random = new Random());
 		}
 
-		String key = readerSourceKeyList.get(random.nextInt(readerSourceKeyList.size()));
+		key = readerSourceKeyList.get(random.nextInt(readerSourceKeyList.size()));
 		DataSourceKeyContainer.set(key);
 		return key;
 	}
@@ -84,16 +89,14 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 		String key = DataSourceKeyContainer.get();
 		if (key==null) {
 			if (readerSourceKeyList!=null && !readerSourceKeyList.isEmpty()) {
-				key = readerSourceKeyList.get(0);
+				key = toReaderDataSource();
 			}else if (writerSourceKeyList!=null && !writerSourceKeyList.isEmpty()) {
-				key = writerSourceKeyList.get(0);
+				key = toWriterDataSource();
 			}
 			
 			if (key!=null) {
 				DataSourceKeyContainer.set(key);
 			}
-		}else if (key.startsWith(DATA_SOURCE_KEY_READER)){
-			return toReaderDataSource();
 		}
 		return key;
 	}
