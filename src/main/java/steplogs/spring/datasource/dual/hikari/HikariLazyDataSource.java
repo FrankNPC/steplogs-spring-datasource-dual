@@ -51,7 +51,6 @@ public class HikariLazyDataSource implements DataSource {
 	@Override
 	public void setLogWriter(PrintWriter out) throws SQLException {
 		defaultResolver.apply().setLogWriter(out);
-		
 	}
 
 	@Override
