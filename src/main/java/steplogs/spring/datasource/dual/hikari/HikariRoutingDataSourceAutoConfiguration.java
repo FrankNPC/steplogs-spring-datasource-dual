@@ -14,7 +14,7 @@ import steplogs.spring.datasource.dual.RandomDataSourceSwitcher;
 public class HikariRoutingDataSourceAutoConfiguration {
 	
 	@Bean("HikariRoutingDataSourceProxyCreator")
-	@ConditionalOnMissingBean(name="HikariRoutingDataSourceProxyCreator")
+//	@ConditionalOnMissingBean(name="HikariRoutingDataSourceProxyCreator")
 	DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
 		DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator() {
 			private static final long serialVersionUID = -6678903539018663337L;
@@ -28,13 +28,13 @@ public class HikariRoutingDataSourceAutoConfiguration {
 	}
 	
 	@Bean("DataSourceTransationalPointcut")
-	@ConditionalOnMissingBean(DataSourceTransationalPointcut.class)
+	@ConditionalOnMissingBean
 	DataSourceTransationalPointcut createDataSourceTransationalPointcut() {
 		return new DataSourceTransationalPointcut();
 	}
 	
 	@Bean("DataSourceSwitcher")
-	@ConditionalOnMissingBean(DataSourceSwitcher.class)
+	@ConditionalOnMissingBean
 	DataSourceSwitcher getDataSourceSwitcher() {
 		return new RandomDataSourceSwitcher();
 	}
