@@ -1,4 +1,4 @@
-package steplogs.spring.datasource.dual.hikari;
+package io.steplogs.spring.datasource.dual.hikari;
 
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
-import steplogs.spring.datasource.dual.DataSourceResolver;
+import io.steplogs.spring.datasource.dual.DataSourceResolver;
 
 public class HikariLazyDataSource implements DataSource {
 	

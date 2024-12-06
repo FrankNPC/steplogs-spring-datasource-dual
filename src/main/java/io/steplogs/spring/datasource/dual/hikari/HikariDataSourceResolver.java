@@ -1,11 +1,11 @@
-package steplogs.spring.datasource.dual.hikari;
+package io.steplogs.spring.datasource.dual.hikari;
 
 import javax.sql.DataSource;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import steplogs.spring.datasource.dual.DataSourceResolver;
+import io.steplogs.spring.datasource.dual.DataSourceResolver;
 
 public class HikariDataSourceResolver implements DataSourceResolver {
 	

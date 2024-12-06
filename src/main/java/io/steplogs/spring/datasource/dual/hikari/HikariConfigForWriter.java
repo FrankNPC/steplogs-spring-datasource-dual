@@ -1,4 +1,4 @@
-package steplogs.spring.datasource.dual.hikari;
+package io.steplogs.spring.datasource.dual.hikari;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Lazy;
 
 import com.zaxxer.hikari.HikariConfig;
 
+import io.steplogs.spring.datasource.dual.DataSourceConfiguration;
 import jakarta.annotation.Resource;
-import steplogs.spring.datasource.dual.DataSourceConfiguration;
 
 public class HikariConfigForWriter implements DataSourceConfiguration<HikariConfig> {
 

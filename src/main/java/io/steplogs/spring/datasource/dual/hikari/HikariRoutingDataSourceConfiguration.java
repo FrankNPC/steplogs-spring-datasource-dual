@@ -1,4 +1,4 @@
-package steplogs.spring.datasource.dual.hikari;
+package io.steplogs.spring.datasource.dual.hikari;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +9,9 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.steplogs.spring.datasource.dual.DataSourceSwitcher;
+import io.steplogs.spring.datasource.dual.DefaultRoutingDataSource;
 import jakarta.annotation.Resource;
-import steplogs.spring.datasource.dual.DataSourceSwitcher;
-import steplogs.spring.datasource.dual.DefaultRoutingDataSource;
 
 @Configuration
 public class HikariRoutingDataSourceConfiguration {

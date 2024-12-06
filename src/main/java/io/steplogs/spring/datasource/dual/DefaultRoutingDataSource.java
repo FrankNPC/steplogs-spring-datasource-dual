@@ -1,4 +1,4 @@
-package steplogs.spring.datasource.dual;
+package io.steplogs.spring.datasource.dual;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

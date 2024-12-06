@@ -1,4 +1,4 @@
-package steplogs.spring.datasource.dual.hikari;
+package io.steplogs.spring.datasource.dual.hikari;
 
 
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-import steplogs.spring.datasource.dual.DataSourceSwitcher;
-import steplogs.spring.datasource.dual.DataSourceTransationalPointcut;
-import steplogs.spring.datasource.dual.RandomDataSourceSwitcher;
+import io.steplogs.spring.datasource.dual.DataSourceSwitcher;
+import io.steplogs.spring.datasource.dual.DataSourceTransationalPointcut;
+import io.steplogs.spring.datasource.dual.RandomDataSourceSwitcher;
 
 @Import({HikariRoutingDataSourceConfiguration.class, HikariConfigForWriter.class, HikariConfigForReader.class})
 public class HikariRoutingDataSourceAutoConfiguration {
