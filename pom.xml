@@ -10,8 +10,11 @@
 	<packaging>jar</packaging>
 
 	<name>steplogs-spring-datasource-dual</name>
-	<description>Steplogs Spring Read/Write Dual Datasource Framework</description>
-	<url>https://steplogs.io</url>
+	<description>
+		Steplogs Spring Read/Write Dual Datasource Framework
+		See https://github.com/FrankNPC/steplogs-spring-datasource-dual
+	</description>
+	<url>https://www.steplogs.io</url>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,7 +85,100 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.18.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>set</goal>
+						</goals>
+						<configuration>
+							<newVersion>${project.version}</newVersion>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.simplify4u.plugins</groupId>
+				<artifactId>sign-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
-		
 	</build>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>cloudsmith</id>
+			<url>https://maven.cloudsmith.io/steplogs/public/</url>
+		</snapshotRepository>
+		<repository>
+			<id>cloudsmith</id>
+			<url>https://maven.cloudsmith.io/steplogs/public/</url>
+		</repository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>steplogs-public</id>
+			<url>https://dl.cloudsmith.io/public/steplogs/public/maven/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<developers>
+		<developer>
+			<id>FrankNPC</id>
+			<name>FrankNPC</name>
+			<email>technology@steplogs.io</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/FrankNPC/steplogs-spring-datasource-dual</url>
+		<connection>scm:git:https://github.com/FrankNPC/steplogs-spring-datasource-dual.git</connection>
+		<developerConnection>scm:git:ssh://github.com/FrankNPC/steplogs-spring-datasource-dual.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	
 </project>
