@@ -5,12 +5,17 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 
 import io.steplogs.spring.datasource.dual.DataSourceSwitcher;
 import io.steplogs.spring.datasource.dual.DataSourceTransationalPointcut;
+import io.steplogs.spring.datasource.dual.DefaultRoutingDataSource;
 import io.steplogs.spring.datasource.dual.RandomDataSourceSwitcher;
 
-@Import({HikariRoutingDataSourceConfiguration.class, HikariConfigForWriter.class, HikariConfigForReader.class})
+@Import({
+	HikariRoutingDataSourceConfiguration.class, 
+	HikariConfigForWriter.class, 
+	HikariConfigForReader.class})
 public class HikariRoutingDataSourceAutoConfiguration {
 	
 	@Bean("HikariRoutingDataSourceProxyCreator")
@@ -38,4 +43,15 @@ public class HikariRoutingDataSourceAutoConfiguration {
 	DataSourceSwitcher getDataSourceSwitcher() {
 		return new RandomDataSourceSwitcher();
 	}
+
+	@Bean("TransactionAwareDataSourceProxy")
+	@ConditionalOnMissingBean
+	public TransactionAwareDataSourceProxy transactionAwareDataSourceProxy(DefaultRoutingDataSource defaultRoutingDataSource) {
+	    return new TransactionAwareDataSourceProxy(defaultRoutingDataSource);
+	}
+	
+//	@Bean
+//	public DataSourceTransactionManager transactionManager(TransactionAwareDataSourceProxy transactionAwareDataSourceProxy) {
+//	    return new DataSourceTransactionManager(transactionAwareDataSourceProxy);
+//	}
 }

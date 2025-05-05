@@ -17,7 +17,7 @@ public class HikariLazyDataSource implements DataSource {
 	public HikariLazyDataSource(DataSourceResolver resolver) {
 		this.defaultResolver = resolver;
 	}
-
+	
 	@Override
 	public Connection getConnection() throws SQLException {
 		return defaultResolver.apply().getConnection();
