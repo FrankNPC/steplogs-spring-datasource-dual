@@ -25,15 +25,12 @@ public class DataSourceTransationalPointcut extends AbstractGenericPointcutAdvis
 	private Pointcut pointcut = new DynamicMethodMatcherPointcut() {
 		@Override
 		public boolean matches(Method method, Class<?> targetClass, Object... args) {
-			return matches(method, targetClass);
+			return method.isAnnotationPresent(Transactional.class) 
+					|| targetClass.isAnnotationPresent(Transactional.class);
 		}
 		@Override
 		public boolean matches(Method method, Class<?> targetClass) {
-			return method.isAnnotationPresent(Read.class) 
-					|| targetClass.isAnnotationPresent(Read.class)
-					|| method.isAnnotationPresent(Write.class) 
-					|| targetClass.isAnnotationPresent(Write.class)
-					|| method.isAnnotationPresent(Transactional.class) 
+			return method.isAnnotationPresent(Transactional.class) 
 					|| targetClass.isAnnotationPresent(Transactional.class);
 		}
 	};
@@ -46,15 +43,7 @@ public class DataSourceTransationalPointcut extends AbstractGenericPointcutAdvis
 	private Advice beforeAdvice = new MethodBeforeAdvice(){
 		@Override
 		public void before(Method method, Object[] args, Object target) throws Throwable {
-			if (method.isAnnotationPresent(Write.class) 
-					|| method.isAnnotationPresent(Transactional.class) 
-					|| (!method.isAnnotationPresent(Read.class) 
-							&& ((target instanceof Class) ? (Class<?>)target : target.getClass()).isAnnotationPresent(Write.class)
-							|| ((target instanceof Class) ? (Class<?>)target : target.getClass()).isAnnotationPresent(Transactional.class))) {
-				dataSourceSwitcher.toWriterDataSource();
-			}else {
-				dataSourceSwitcher.toReaderDataSource();
-			}
+			dataSourceSwitcher.toWriterDataSource();
 		}};
 	@Override
 	public Advice getAdvice() {

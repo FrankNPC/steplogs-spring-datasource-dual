@@ -9,9 +9,9 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 
 	private static final ThreadLocal<String> DataSourceKeyContainer = new ThreadLocal<>();
 
-	private static final String READER_KEY = "READER_";
+	private static final String READER_DATA_SOURCE_KEY = "READER_DATA_SOURCE_";
 	
-	private static final String WRITER_KEY = "WRITER_";
+	private static final String WRITER_DATA_SOURCE_KEY = "WRITER_DATA_SOURCE_";
 
 	private List<String> readerSourceKeyList = null;
 	
@@ -21,7 +21,7 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 	public List<String> createReaderDataSourceKeys(int readerCount){
 		List<String> sourceKeys = new ArrayList<>();
 		for(int i=0; i<readerCount; i++) {
-			sourceKeys.add(READER_KEY+i);
+			sourceKeys.add(READER_DATA_SOURCE_KEY+i);
 		}
 		return readerSourceKeyList = Collections.unmodifiableList(sourceKeys);
 	}
@@ -30,7 +30,7 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 	public List<String> createWriterDataSourceKeys(int writerCount){
 		List<String> sourceKeys = new ArrayList<>();
 		for(int i=0; i<writerCount; i++) {
-			sourceKeys.add(WRITER_KEY+i);
+			sourceKeys.add(WRITER_DATA_SOURCE_KEY+i);
 		}
 		return writerSourceKeyList = Collections.unmodifiableList(sourceKeys);
 	}
@@ -40,7 +40,7 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 	@Override
 	public String toWriterDataSource() {
 		String key = DataSourceKeyContainer.get();
-		if (key!=null && key.charAt(0)==WRITER_KEY.charAt(0)) {
+		if (key!=null && key.charAt(0)==WRITER_DATA_SOURCE_KEY.charAt(0)) {
 			return key;
 		}
 
@@ -61,7 +61,7 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 	@Override
 	public String toReaderDataSource() {
 		String key = DataSourceKeyContainer.get();
-		if (key!=null && key.charAt(0)==READER_KEY.charAt(0)) {
+		if (key!=null && key.charAt(0)==READER_DATA_SOURCE_KEY.charAt(0)) {
 			return key;
 		}
 		
@@ -90,7 +90,7 @@ public class RandomDataSourceSwitcher implements DataSourceSwitcher {
 		if (key==null) {
 			if (readerSourceKeyList!=null && !readerSourceKeyList.isEmpty()) {
 				key = toReaderDataSource();
-			} else {
+			}else if (writerSourceKeyList!=null && !writerSourceKeyList.isEmpty()) {
 				key = toWriterDataSource();
 			}
 			
