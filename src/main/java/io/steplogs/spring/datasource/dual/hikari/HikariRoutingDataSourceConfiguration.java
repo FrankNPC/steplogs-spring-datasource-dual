@@ -1,5 +1,6 @@
 package io.steplogs.spring.datasource.dual.hikari;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class HikariRoutingDataSourceConfiguration {
 			}
 		}
 		if (!dataSources.isEmpty()) {
-			routingDataSource.setTargetDataSources(dataSources);
+			routingDataSource.setTargetDataSources(Collections.unmodifiableMap(dataSources));
 		}
 		if (defaultDataSource!=null) {
 			routingDataSource.setDefaultTargetDataSource(defaultDataSource);
