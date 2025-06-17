@@ -4,9 +4,9 @@
 	<servers>
 
 		<server>
-			<id>cloudsmith</id>
-      		<username>technology-department</username>
-			<password>${cloudsmith.password}</password>
+			<id>central</id>
+			<username>${sonatype.username}</username>
+			<password>${sonatype.password}</password>
 		</server>
 		
 	</servers>
