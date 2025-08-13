@@ -16,7 +16,7 @@ import io.steplogs.spring.datasource.dual.RandomDataSourceSwitcher;
 	HikariRoutingDataSourceConfiguration.class, 
 	HikariConfigForWriter.class, 
 	HikariConfigForReader.class})
-public class HikariRoutingDataSourceAutoConfiguration {
+public class AutoConfigurationHikariRoutingDataSource {
 	
 	@Bean("HikariRoutingDataSourceProxyCreator")
 //	@ConditionalOnMissingBean(name="HikariRoutingDataSourceProxyCreator")
